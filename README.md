@@ -1,5 +1,7 @@
 # MAX at Techpoint
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/MAXDeliveryNG/techpoint-questions.svg?token=974f30d165b5356c36597e4b54fc13e75420b9033b4e444d521637cdc283537a&ts=1517015803146)](https://greenkeeper.io/)
+
 This repo contains questions you should be able to solve in a reasonable amount of time.
 
 ## Questions
