@@ -1,4 +1,4 @@
-const classifier = require('../src/solutions/classifier');
+const classifier = require('../src/classifier');
 const input = require('../src/inputs/input');
 const output = require('../src/outputs/output');
 const inputEdge = require('../src/inputs/edge-input');
