@@ -1,50 +1,49 @@
-The go file below has a few error, can you spot and fix them?
+The JS file below has a few errors, can you indentify and fix them?
 
-```go
-package models
+```js
+const express = require(express);
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const http = require('http');
 
-import (
-	"database/sql"
-	"time"
+/**
+ * Assume that these are error free.
+ */
+const User = require('./models/user');
+const logger = require('./utils/logger');
 
-	_ "github.com/lib/pq"
-)
+const mongoDB = process.env.MONGO_URI;
 
-type Tasks struct {
-	ID         int
-	Title      string
-	Done       bool
-	UserID    int
-	CreatedAt time.Time
-}
+const app = express();
 
-var Db *sql.DB
+mongoose.connect(mongoDB, { useMongoClient: true });
+mongoose.Promise = global.Promise;
 
-func main() {
-	var err error
+const db = mongoose.connection;
 
-	Db, err = sql.Open("postgres", "user=postgres dbname=go_app sslmode=disable")
-	if err != nil {
-		panic(err)
-	}
-}
+app.use(bodyParser.json());
 
-func (task *Tasks) Create() error {
-	query := "insert into tasks (title, user_id) values ($1, $2) returning id, done"
+// handler to save user
+app.get('/save', function(res, req) {
+  const user = new User(user);
 
-	stmt, err := Db.Prepare(query)
+  user.save(function(err) {
+    if (err) {
+      res.status(500).send(err);
+      return logger.log(err);
+    }
+  });
 
-	if err != nil {
-		panic(err)
-	}
+  res.status(200).send('success');
 
-	stmt.Close()
-	err = stmt.QueryRow(task.Title, task.User_id).Scan(&task.Id, &task.Done)
+  return res.json(user);
+});
 
-	if err != nil {
-		return err
-	}
-	return
-}
+const server = http.createServer(app);
 
+server.listen(80, function() {
+  db.on('error', function(error) {
+    logger.log(error);
+  });
+});
 ```

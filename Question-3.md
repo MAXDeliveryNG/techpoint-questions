@@ -1,49 +1,83 @@
-The JS file below has a few errors, can you indentify and fix them?
+# Question
+
+## Simple
+The Morse code encodes every character as a sequence of "dots" and "dashes".
+
+For example, the letter A is coded as ·−, letter Q is coded as −−·−, and digit 1 is coded as ·−−−.
+
+The Morse code is case-insensitive, traditionally capital letters are used. When the message is written in Morse code, a single space is used to separate the character codes and 3 spaces are used to separate words.
+
+For example, the message `MAX NOW` in Morse code is -- ·- -··-   -· --- ·--.
+
+NOTE: Extra spaces before or after the code have no meaning and should be ignored. In addition to letters, digits and some punctuation, there are some special service codes, the most notorious of those is the international distress signal SOS (that was first issued by Titanic), that is coded as ···−−−···. These special codes are treated as single special characters, and usually are transmitted as separate words.
+Your task is to implement a function that would take the morse code as input and return a decoded human-readable string.
+
+For example.
 
 ```js
-const express = require(express);
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const http = require('http');
-
-/**
- * Assume that these are error free.
- */
-const User = require('./models/user');
-const logger = require('./utils/logger');
-
-const mongoDB = process.env.MONGO_URI;
-
-const app = express();
-
-mongoose.connect(mongoDB, { useMongoClient: true });
-mongoose.Promise = global.Promise;
-
-const db = mongoose.connection;
-
-app.use(bodyParser.json());
-
-// handler to save user
-app.get('/save', function(res, req) {
-  const user = new User(user);
-
-  user.save(function(err) {
-    if (err) {
-      res.status(500).send(err);
-      return logger.log(err);
-    }
-  });
-
-  res.status(200).send('success');
-
-  return res.json(user);
-});
-
-const server = http.createServer(app);
-
-server.listen(80, function() {
-  db.on('error', function(error) {
-    logger.log(error);
-  });
-});
+decodeMorse('·- -··- -· --- ·--.')
+//should return "MAX NOW"
 ```
+
+Use the constant `MORSE_CODE` below to translate.
+
+```js
+const MORSE_CODE = {
+  '-.-.--': '!',
+  '.-..-.': '"',
+  '...-..-': '$',
+  '.-...': '&',
+  '.----.': "'",
+  '-.--.': '(',
+  '-.--.-': ')',
+  '.-.-.': '+',
+  '--..--': ',',
+  '-....-': '-',
+  '.-.-.-': '.',
+  '-..-.': '/',
+  '-----': '0',
+  '.----': '1',
+  '..---': '2',
+  '...--': '3',
+  '....-': '4',
+  '.....': '5',
+  '-....': '6',
+  '--...': '7',
+  '---..': '8',
+  '----.': '9',
+  '---...': ':',
+  '-.-.-.': ';',
+  '-...-': '=',
+  '..--..': '?',
+  '.--.-.': '@',
+  '.-': 'A',
+  '-...': 'B',
+  '-.-.': 'C',
+  '-..': 'D',
+  '.': 'E',
+  '..-.': 'F',
+  '--.': 'G',
+  '....': 'H',
+  '..': 'I',
+  '.---': 'J',
+  '-.-': 'K',
+  '.-..': 'L',
+  '--': 'M',
+  '-.': 'N',
+  '---': 'O',
+  '.--.': 'P',
+  '--.-': 'Q',
+  '.-.': 'R',
+  '...': 'S',
+  '-': 'T',
+  '..-': 'U',
+  '...-': 'V',
+  '.--': 'W',
+  '-..-': 'X',
+  '-.--': 'Y',
+  '--..': 'Z',
+  '..--.-': '_',
+  '...---...': 'SOS',
+};
+```
+

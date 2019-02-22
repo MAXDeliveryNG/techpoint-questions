@@ -1,83 +1,36 @@
 # Question
 
-## Simple
-The Morse code encodes every character as a sequence of "dots" and "dashes".
+Meet Anna, she likes to travel with as many clean pair of socks for her trips abroad.
 
-For example, the letter A is coded as ·−, letter Q is coded as −−·−, and digit 1 is coded as ·−−−.
+Anna's socks are divided into two drawers: clean and dirty socks. Anna has an unusual washing machine that can only wash a sock at a time and clean at most K socks described by `noOfWashes`.
 
-The Morse code is case-insensitive, traditionally capital letters are used. When the message is written in Morse code, a single space is used to separate the character codes and 3 spaces are used to separate words.
+Anna wants to pick socks for laundering in such a way that after washing she will have a maximal number of clean, same-coloured pair of socks. It is possible that some socks cannot be paired with any other sock, because Anna may have lost socks over the years.
 
-For example, the message `MAX NOW` in Morse code is -- ·- -··-   -· --- ·--.
+---
 
-NOTE: Extra spaces before or after the code have no meaning and should be ignored. In addition to letters, digits and some punctuation, there are some special service codes, the most notorious of those is the international distress signal SOS (that was first issued by Titanic), that is coded as ···−−−···. These special codes are treated as single special characters, and usually are transmitted as separate words.
-Your task is to implement a function that would take the morse code as input and return a decoded human-readable string.
+Anna has exactly clean and M dirty socks, which are described in the arrays `cleanPile` and `dirtyPile` respectively. The colours of the socks are represented as integers with _equal numbers_ representing identical colours.
 
-For example.
+For example, if Anna's washing machine can clean at most 2 socks.
 
-```js
-decodeMorse('·- -··- -· --- ·--.')
-//should return "MAX NOW"
+```ts
+noOfWashes: number = 2;
+cleanPile: number[] = [1, 2, 1, 1];
+dirtyPile: number[] = [1, 4, 3, 2, 4];
 ```
 
-Use the constant `MORSE_CODE` below to translate.
+Then, the maximum number of pairs of socks Anna can take on her trip is 3.
 
-```js
-const MORSE_CODE = {
-  '-.-.--': '!',
-  '.-..-.': '"',
-  '...-..-': '$',
-  '.-...': '&',
-  '.----.': "'",
-  '-.--.': '(',
-  '-.--.-': ')',
-  '.-.-.': '+',
-  '--..--': ',',
-  '-....-': '-',
-  '.-.-.-': '.',
-  '-..-.': '/',
-  '-----': '0',
-  '.----': '1',
-  '..---': '2',
-  '...--': '3',
-  '....-': '4',
-  '.....': '5',
-  '-....': '6',
-  '--...': '7',
-  '---..': '8',
-  '----.': '9',
-  '---...': ':',
-  '-.-.-.': ';',
-  '-...-': '=',
-  '..--..': '?',
-  '.--.-.': '@',
-  '.-': 'A',
-  '-...': 'B',
-  '-.-.': 'C',
-  '-..': 'D',
-  '.': 'E',
-  '..-.': 'F',
-  '--.': 'G',
-  '....': 'H',
-  '..': 'I',
-  '.---': 'J',
-  '-.-': 'K',
-  '.-..': 'L',
-  '--': 'M',
-  '-.': 'N',
-  '---': 'O',
-  '.--.': 'P',
-  '--.-': 'Q',
-  '.-.': 'R',
-  '...': 'S',
-  '-': 'T',
-  '..-': 'U',
-  '...-': 'V',
-  '.--': 'W',
-  '-..-': 'X',
-  '-.--': 'Y',
-  '--..': 'Z',
-  '..--.-': '_',
-  '...---...': 'SOS',
-};
-```
+For the same problem, if Anna's machine isn't working. The maximum number of socks she can take on her trips is 1.
 
+Also, if Anna's machine can wash as many socks as she wants, the maximum number of pair of socks she can take on her trip is 4.
+
+Note that clean socks do not need to be washed again.
+
+---
+
+Write a function that given the `noOfWashes`, `cleanPile`, and `dirtyPile` returns the maximum number of pair of socks that Racheal can take on the trip with the given conditions.
+
+Assume that
+
+`noOfWashes` is an integer with the range `0..50`
+`cleanPile` and `dirtyPile` is an integer array within the range `1..50`, they cannot be empty, and contains at most 50 elements.
